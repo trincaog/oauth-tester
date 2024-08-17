@@ -57,20 +57,25 @@ export async function tokenIntrospection(oAuthConfig, token) {
     body["client_secret"] = oAuthConfig.clientSecret;
   }
 
-  let response = await fetch(
-    oAuthConfig.authorizationServer +
-      "/" +
-      oAuthConfig.tokenIntrospectionEndpoint,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+  try {
+    let response = await fetch(
+      oAuthConfig.authorizationServer +
+        "/" +
+        oAuthConfig.tokenIntrospectionEndpoint,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(body),
       },
-      body: new URLSearchParams(body),
-    },
-  );
+    );
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.log("Error in token introspection: ", error);
+    return null;
+  }
 }
 
 export async function refreshAccessToken(oAuthConfig, refreshToken) {

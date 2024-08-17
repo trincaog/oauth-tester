@@ -1,5 +1,12 @@
 # OAuth Tester
 
+Testing tool for OAuth 2.0 authorization code flow (including PKCE).
+
+Tested with:
+
+- Keycloak
+- Auth0
+
 ## Usage
 
 ### `yarn start`
